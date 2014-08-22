@@ -1,0 +1,8 @@
+{
+    "name": "Storypalette Player App",
+    "version": "0.1.0",
+    "main": "main.js",
+    "dependencies": {        
+        "dmxpro": "^0.1.4"
+    }
+}
