@@ -14,7 +14,7 @@ git clone https://github.com/storypalette/storypalette-player-app.git
 cd storypalette-player-app
 sudo bash install install.sh
 
-cp configSample.js '~/Library/Application Suppport/storypalette-player-app/config.js'
+cp configSample.json ~/Library/Application\ Suppport/storypalette-player-app/config.json
 # Now, edit config.js with player username and password.
 
 sudo bash build.sh
