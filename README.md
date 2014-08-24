@@ -12,12 +12,12 @@
 ```sh
 git clone https://github.com/storypalette/storypalette-player-app.git
 cd storypalette-player-app
-sudo bash install install.sh
+./install.sh
 
 cp configSample.json ~/Library/Application\ Suppport/storypalette-player-app/config.json
 # Now, edit config.js with player username and password.
 
-sudo bash build.sh
+./build.sh
 ```
 
 If atom-shell fails to build, download the latest release version from https://github.com/atom/atom-shell/releases. Then move `Atom.app` to `storypalette-player-app/atom-shell/out/release/`.
@@ -32,4 +32,4 @@ Double-click `Atom.app` or run from terminal
 
 ## Developing
 
-Run `sudo bash build.sh` after making any changes.
+Run `./build.sh` after making any changes.
