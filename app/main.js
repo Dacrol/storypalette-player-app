@@ -2,13 +2,25 @@ var app             = require('app');
 var BrowserWindow   = require('browser-window');
 var Menu            = require('menu')
 var globalShortcut  = require('global-shortcut');
-var config          = require('config');
 var ipc             = require('ipc');
+var dialog          = require('dialog');
+
+// Load config file, fail if not found.
+var quit = false;
+try {
+  var config = require(process.env.HOME + '/Library/Application Support/storypalette-player-app/config.json');
+} catch(err) {
+  dialog.showMessageBox({message: err, buttons:['ok']});
+  quit = true;
+}
 
 var mainWindow = null;
 
 app.on('ready', function() {
+  if (quit) {app.quit();}
+
   mainWindow = new BrowserWindow({width: 800, height: 600});
+  //mainWindow.openDevTools();
 
   var toggleKiosk = function() {
     mainWindow.setKiosk(!mainWindow.isKiosk());

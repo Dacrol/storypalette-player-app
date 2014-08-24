@@ -1,7 +1,7 @@
 echo "Building Storypalette Player App"
 
-sudo rm -rf ./atom-shell/out/release/atom.app/contents/resources/app
+rm -rf ./Atom.app/Contents/Resources/app
 
-cp -r app ./atom-shell/out/release/atom.app/contents/resources
+cp -r app ./Atom.app/Contents/Resources
 
 echo "Done!"
