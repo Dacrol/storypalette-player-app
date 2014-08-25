@@ -19,12 +19,7 @@ var mainWindow = null;
 app.on('ready', function() {
   if (quit) {app.quit();}
 
-  mainWindow = new BrowserWindow({width: 800, height: 600});
-  //mainWindow.openDevTools();
-
-  var toggleKiosk = function() {
-    mainWindow.setKiosk(!mainWindow.isKiosk());
-  };
+  mainWindow = new BrowserWindow({width: 800, height: 600, title: 'Storypalette Player'});
 
   // Start in kiosk mode
   mainWindow.setKiosk(true);
@@ -34,6 +29,32 @@ app.on('ready', function() {
       label: 'Storypalette Player',
       submenu: [                                
         {
+          label: 'Toggle fullscreen',
+          accelerator: 'Command+F',
+          click: function() {
+            mainWindow.setKiosk(!mainWindow.isKiosk());
+          }
+        },
+        {
+          label: 'Toggle dev tools',
+          accelerator: 'Command+Alt+J',
+          click: function() {
+            mainWindow.toggleDevTools();
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {
+          label: 'About Storypalette Player',
+          click: function() {
+            dialog.showMessageBox({message: 'Storypalette Player v' + app.getVersion(), buttons:['ok']});
+          }
+        },
+        {
+          type: 'separator'
+        },
+        {
           label: 'Quit',
           accelerator: 'Command+Q',
           click: function() {
@@ -41,41 +62,11 @@ app.on('ready', function() {
           }
         },
       ]
-    },
-    {
-      submenu: [
-        {
-          label: 'Enter kiosk mode',
-          accelerator: 'F',
-          click: function() {
-            mainWindow.setKiosk(true);
-          }
-        }
-      ]
-    },
-    {
-      label: 'User',
-      submenu: [
-        {
-          label: 'Log out',
-          click: function() {
-            console.log("Logging out");
-          }
-        }
-      ]
     }
   ];
 
   var menu = Menu.buildFromTemplate(menuTemplate);
   Menu.setApplicationMenu(menu);
-
-  globalShortcut.register('f', function() { 
-    toggleKiosk();
-  });
-
-  globalShortcut.register('esc', function() { 
-    mainWindow.setKiosk(false);
-  });
 
   mainWindow.loadUrl(config.playerUrl);
 
@@ -83,7 +74,7 @@ app.on('ready', function() {
     mainWindow = null;
   });
 
-  // IPC API: Called synchronously.
+  // IPC API: Called synchronously from renderer.
   ipc.on('getCredentials', function(event, arg) {
     event.returnValue = config.credentials;
   });

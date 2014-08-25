@@ -1,7 +1,6 @@
-echo "Building Storypalette Player App"
+echo "Assembling Storypalette Player.app..."
 
-rm -rf ./Atom.app/Contents/Resources/app
-
-cp -r app ./Atom.app/Contents/Resources
+rm -rf ./Storypalette\ Player.app/Contents/Resources/app
+cp -r app ./Storypalette\ Player.app/Contents/Resources
 
 echo "Done!"
