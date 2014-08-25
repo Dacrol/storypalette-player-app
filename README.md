@@ -1,6 +1,11 @@
 # storypalette-player-app
 
-## Installing
+## Install a pre-built release
+
+- Download from http://github.com/storypalette/storypalette-player-app/releases
+- Edit `config.json` and move it to `~/Library/Application\ Suppport/storypalette-player-app`
+
+## Installing and building from scratch
 
 ### Prerequisites
 
@@ -14,13 +19,11 @@ git clone https://github.com/storypalette/storypalette-player-app.git
 cd storypalette-player-app
 ./install.sh
 
-cp configSample.json ~/Library/Application\ Suppport/storypalette-player-app/config.json
+cp config.json ~/Library/Application\ Suppport/storypalette-player-app/config.json
 # Now, edit config.js with player username and password.
 
 ./build.sh
 ```
-
-If atom-shell fails to build, download the latest release version from https://github.com/atom/atom-shell/releases. Then move `Atom.app` to `storypalette-player-app/atom-shell/out/release/`.
 
 ## Running
 
@@ -33,3 +36,9 @@ Double-click `Atom.app` or run from terminal
 ## Developing
 
 Run `./build.sh` after making any changes.
+
+## Deploying a new relese
+
+- Update version in `package.json`
+- Make sure Info.plist is correct.
+- Make a new Github release.

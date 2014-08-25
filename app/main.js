@@ -8,7 +8,8 @@ var dialog          = require('dialog');
 // Load config file, fail if not found.
 var quit = false;
 try {
-  var config = require(process.env.HOME + '/Library/Application Support/storypalette-player-app/config.json');
+  // TODO: Make platform independent.
+  var config = require(process.env.HOME + '/Library/Application Support/Storypalette Player/config.js');
 } catch(err) {
   dialog.showMessageBox({message: err, buttons:['ok']});
   quit = true;
