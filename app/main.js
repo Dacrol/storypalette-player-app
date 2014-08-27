@@ -23,7 +23,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600, title: 'Storypalette Player'});
 
   // Start in kiosk mode
-  mainWindow.setKiosk(true);
+  var kiosk = (typeof config.kioskMode === 'boolean') ? config.kioskMode : true;
+  mainWindow.setKiosk(kiosk);
 
   var menuTemplate = [
     {
