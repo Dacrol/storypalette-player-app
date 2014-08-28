@@ -32,7 +32,7 @@ app.on('ready', function() {
       submenu: [                                
         {
           label: 'Toggle fullscreen',
-          accelerator: 'Command+F',
+          accelerator: 'Command+Shift+F',
           click: function() {
             mainWindow.setKiosk(!mainWindow.isKiosk());
           }
