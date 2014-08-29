@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+  <title>Storypalette Player: Connecting...</title>
+  <style>
+    body {
+      color: grey;
+      background: black;
+      font-family: 'Arial';
+    }
+
+    #connecting {
+      position: absolute;
+      bottom: 0;
+      height: 100px;
+      left: 0;
+      margin: auto;
+      top: 0;
+      right: 0;
+      width: 600px;
+      text-align: center;
+    }
+  </style>
+  <script src="vendor/angular/angular.js" type="text/javascript"></script>
+  <script>
+    angular.module('connecting', [])
+
+    .controller('ConnectingCtrl', function($scope) {
+      var ipc = require('ipc'); 
+      $scope.playerUrl = ipc.sendSync('getPlayerUrl');
+
+      var getStatusMessage = function(code) {
+        switch (code) {
+          case 'ENOTFOUND': 
+            return 'Ingen internetanslutning. Kontakta teknisk support! [' + code + ']';
+          case 'ECONNREFUSED':
+          case 'ESERVER':
+            return 'Servern svarar inte. Kontakta Storypalette-support! [' + code + ']';
+          default:
+            return 'Okänt fel. Kontakta Storypalette-support! [' + code + ']';
+        }
+      };
+
+      $scope.status = 'Ansluter...';
+
+      ipc.on('connectionStatus', function(status) {
+        $scope.$apply(function() {
+          $scope.status = getStatusMessage(status.code); 
+        });
+      });
+
+    });
+  </script>
+</head>
+<body ng-app="connecting" ng-controller="ConnectingCtrl">
+  <div id="connecting">
+    <h4>Ansluter till {{playerUrl}}...</h4>
+    <p>Status: {{status}}</h3>
+  </div>
+</body>
+</html>
