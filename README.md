@@ -3,7 +3,7 @@
 ## Install a pre-built release
 
 - Download from http://github.com/storypalette/storypalette-player-app/releases
-- Edit `config.json` and move it to `~/Library/Application\ Suppport/storypalette-player-app`
+- Edit `config.js` and move it to `~/Library/Application Suppport/Storypalette Player/config.js`
 
 ## Installing and building from scratch
 
@@ -19,7 +19,7 @@ git clone https://github.com/storypalette/storypalette-player-app.git
 cd storypalette-player-app
 ./install.sh
 
-cp config.json ~/Library/Application\ Suppport/storypalette-player-app/config.json
+cp config.js ~/Library/Application\ Suppport/Storypalette\ Player/config.js
 # Now, edit config.js with player username and password.
 
 ./build.sh
