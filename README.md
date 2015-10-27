@@ -4,6 +4,7 @@
 
 - Download from http://github.com/storypalette/storypalette-player-app/releases
 - Edit `config.js` and move it to `~/Library/Application Suppport/Storypalette Player/config.js`
+- Note: Only tested to work on OS X Yosemite
 
 ## Installing and building from scratch
 
