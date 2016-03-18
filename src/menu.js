@@ -1,3 +1,5 @@
+const dialog = require('dialog');
+
 module.exports = function(app, win) {
 
  return [
@@ -5,10 +7,10 @@ module.exports = function(app, win) {
       label: 'Storypalette Player',
       submenu: [                                
         {
-          label: 'Toggle fullscreen',
+          label: 'Toggle kiosk mode',
           accelerator: 'Command+Shift+F',
           click: function() {
-            win.setKiosk(!win.isKiosk());
+            app.setKiosk(!win.isKiosk());
           }
         },
         {

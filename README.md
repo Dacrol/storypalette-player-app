@@ -1,29 +1,29 @@
 # storypalette-player-app
 
-## Install a pre-built release
+## Usage
 
-- Download from http://github.com/storypalette/storypalette-player-app/releases
-- Edit `config.js` and move it to `~/Library/Application Suppport/Storypalette Player/config.js`
-- Note: Only tested to work on OS X Yosemite
+- Download the latest version from the Releases page.
+- Create the file `~/Library/Application Suppport/Storypalette Player/config.js`. It should look like this: 
 
-## Installing and building from scratch
+```js
+module.exports = {
+  // Player user's username and password
+  credentials: {
+    username: '<player username goes here>',
+    password: '<player password goes here>'
+  },
 
-### Prerequisites
+  // URL to the Player interface
+  // Use 'http://player.storypalette.dev:8888' to connect to local version
+  playerUrl: 'http://player.storypalette.net',
 
-- Node.js
-- XCode
+  // If true: start in fullscreen and hide mouse cursor
+  kioskMode: true,
 
-### Clone and build
-
-```sh
-git clone https://github.com/storypalette/storypalette-player-app.git
-cd storypalette-player-app
-./install.sh
-
-cp config.js ~/Library/Application\ Suppport/Storypalette\ Player/config.js
-# Now, edit config.js with player username and password.
-
-./build.sh
+  // Wait this many ms before creating windows.
+  // Useful in a kiosk environment with other applications running.
+  windowDelay: 5000,
+};
 ```
 
 ## Running
@@ -34,12 +34,26 @@ Double-click `Atom.app` or run from terminal
 ./atom-shell/out/Release/Atom.app/Contents/MacOS/Atom
 ```
 
-## Developing
+## Develop
 
-Run `./build.sh` after making any changes.
+### Get started
 
-## Deploying a new relese
+```sh
+$ git clone https://github.com/storypalette/storypalette-player-app.git
+$ npm install
+$ npm start
+```
 
-- Update version in `package.json`
-- Make sure Info.plist is correct.
-- Make a new Github release.
+### Development builds
+
+```sh
+$ npm run build
+$ open dist/Storypalette Player-darwin-x64/Tjollen.app
+```
+
+### Deploy a new version
+
+1. Commit your changes
+2. `npm run build` to build the app
+2. `npm run deploy` will bump npm version, create git tag and push to git
+3. Manually upload the file in the `dist` folder to create a new Github release

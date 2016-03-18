@@ -1,0 +1,30 @@
+{
+  "name": "storypalette-player-app",
+  "productName": "Storypalette Player",
+  "version": "0.2.0",
+  "description": "Standalone Player for Storypalette-enhanced rooms",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron .",
+    "build": "electron-packager . 'Storypalette Player' --platform=darwin --arch=x64 --app-version=$npm_package_version --out=dist --overwrite --ignore=dist",
+    "version": "npm version patch",
+    "deploy": "npm run version && git push --tags origin master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/storypalette/storypalette-player-app"
+  },
+  "keywords": [
+    "storypalette"
+  ],
+  "author": "Unsworn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/storypalette/storypalette-player-app/issues"
+  },
+  "homepage": "https://www.storypalette.net",
+  "devDependencies": {
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.37.2"
+  }
+}

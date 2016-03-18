@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+  <meta charset="UTF-8">
   <title>Storypalette Player: Connecting...</title>
   <style>
     body {
@@ -20,13 +21,13 @@
       text-align: center;
     }
   </style>
-  <script src="vendor/angular/angular.js" type="text/javascript"></script>
+  <script src="angular.js" type="text/javascript"></script>
   <script>
     angular.module('connecting', [])
 
     .controller('ConnectingCtrl', function($scope) {
-      var ipc = require('ipc'); 
-      $scope.playerUrl = ipc.sendSync('getPlayerUrl');
+      var ipcRenderer = require('electron').ipcRenderer; 
+      $scope.playerUrl = ipcRenderer.sendSync('getPlayerUrl');
 
       var getStatusMessage = function(code) {
         switch (code) {
@@ -42,7 +43,7 @@
 
       $scope.status = 'Ansluter...';
 
-      ipc.on('connectionStatus', function(status) {
+      ipcRenderer.on('connectionStatus', function(status) {
         $scope.$apply(function() {
           $scope.status = getStatusMessage(status.code); 
         });
