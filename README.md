@@ -26,14 +26,6 @@ module.exports = {
 };
 ```
 
-## Running
-
-Double-click `Atom.app` or run from terminal 
-
-```sh
-./atom-shell/out/Release/Atom.app/Contents/MacOS/Atom
-```
-
 ## Develop
 
 ### Get started
@@ -48,7 +40,7 @@ $ npm start
 
 ```sh
 $ npm run build
-$ open dist/Storypalette Player-darwin-x64/Tjollen.app
+$ open "dist/Storypalette Player-darwin-x64/Storypalette Player.app"
 ```
 
 ### Deploy a new version
