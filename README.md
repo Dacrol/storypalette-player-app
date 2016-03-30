@@ -47,5 +47,5 @@ $ open "dist/Storypalette Player-darwin-x64/Storypalette Player.app"
 
 1. Commit your changes
 2. `npm run build` to build the app
-2. `npm run deploy` will bump npm version, create git tag and push to git
-3. Manually upload the file in the `dist` folder to create a new Github release
+3. `npm run deploy` will bump npm version, create git tag and push to git
+4. Manually upload the file in the `dist` folder to create a new Github release

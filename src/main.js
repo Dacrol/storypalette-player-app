@@ -1,10 +1,12 @@
 const http = require('http');
 const electron = require('electron');
+const dmxpro = require('dmxpro');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
+
 
 // Globals
 const settings = {
@@ -51,6 +53,11 @@ function createWindow() {
 
   ipcMain.on('getPlayerUrl', function(event) {
     event.returnValue = config.playerUrl;
+  });
+
+  // Async IPC
+  ipcMain.on('dmxMessage', function(event, value) {
+    console.log('dmxMessage', value);
   });
 
   // Emitted when the window is closed.
