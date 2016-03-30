@@ -1,6 +1,6 @@
 const http = require('http');
 const electron = require('electron');
-const dmxpro = require('dmxpro');
+const dmx = require('./storypalette-dmx')();
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
