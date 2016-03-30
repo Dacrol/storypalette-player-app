@@ -1,12 +1,11 @@
 const http = require('http');
 const electron = require('electron');
-const dmx = require('./storypalette-dmx')();
+const dmxPlayer = require('./dmxPlayer')();
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const dialog = electron.dialog;
 const ipcMain = electron.ipcMain;
-
 
 // Globals
 const settings = {
@@ -46,6 +45,13 @@ function createWindow() {
   checkConnection(connCb);
   setInterval(checkConnection, settings.reconnectDelay, connCb);
 
+  // TODO: Start DMX (if available)
+  // First we need to know room data
+  // Then:
+  var room = {some: 'thing'};
+  //dmxplayer.start(room);
+
+
   // IPC API: Called synchronously from renderer.
   ipcMain.on('getCredentials', function(event) {
     event.returnValue = config.credentials;
@@ -57,11 +63,16 @@ function createWindow() {
 
   // Async IPC
   ipcMain.on('dmxMessage', function(event, value) {
-    console.log('dmxMessage', value);
+    console.log('dmxMessage', value.colour);
+    var room = 'get this from ???';
+    dmxPlayer.message(value, room);
   });
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
+    // TODO: shutdown dmx on all kinds of quitting
+    dmxPlayer.shutdown();
+
     mainWindow = null;
   });
 }
