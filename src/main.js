@@ -20,6 +20,9 @@ let config;
 let mainWindow;
 let playerLoaded = false;
 
+// Room info given to us soon by player.storypalette.net 
+let room;
+
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -45,13 +48,6 @@ function createWindow() {
   checkConnection(connCb);
   setInterval(checkConnection, settings.reconnectDelay, connCb);
 
-  // TODO: Start DMX (if available)
-  // First we need to know room data
-  // Then:
-  var room = {some: 'thing'};
-  //dmxplayer.start(room);
-
-
   // IPC API: Called synchronously from renderer.
   ipcMain.on('getCredentials', function(event) {
     event.returnValue = config.credentials;
@@ -61,10 +57,20 @@ function createWindow() {
     event.returnValue = config.playerUrl;
   });
 
+  ipcMain.on('startDmx', function(event, roomData) {
+    console.log('startDmx', roomData);
+    room = roomData;
+    dmxPlayer.start(room);
+  });
+
+  ipcMain.on('stopDmx', function(event) {
+    console.log('stopDmx');
+    dmxPlayer.shutdown();
+  });
+
   // Async IPC
   ipcMain.on('dmxMessage', function(event, value) {
     console.log('dmxMessage', value.colour);
-    var room = 'get this from ???';
     dmxPlayer.message(value, room);
   });
 
@@ -75,6 +81,10 @@ function createWindow() {
 
     mainWindow = null;
   });
+}
+
+app.startDmx = function(room) {
+
 }
 
 app.setKiosk = function(flag) {

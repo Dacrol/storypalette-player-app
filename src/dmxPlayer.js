@@ -1,6 +1,7 @@
-var dmxpro      = require('dmxpro');
-var universe    = null;
-var groups      = {};
+var dmxpro  = require('dmxpro');
+
+var universe = null;
+var groups = {};
 
 function resolveFixtures(value, room) {
   value.fixtures = [];
