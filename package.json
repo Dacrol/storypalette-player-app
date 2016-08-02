@@ -31,6 +31,6 @@
     "require-rebuild": "^1.2.8"
   },
   "dependencies": {
-    "dmxpro": "^0.2.0"
+    "dmxpro": "^0.2.1"
   }
 }
