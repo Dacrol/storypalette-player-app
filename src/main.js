@@ -1,16 +1,17 @@
 const http = require('http');
-const electron = require('electron');
 const dmxPlayer = require('./dmxPlayer')();
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const dialog = electron.dialog;
-const ipcMain = electron.ipcMain;
+const {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  Menu,
+} = require('electron');
 
 // Globals
 const settings = {
-  defaultWidth: 800,
-  defaultHeight: 600,
+  defaultWidth: 1024,
+  defaultHeight: 768,
   windowDelay: 0,
   reconnectDelay: 5000,
   connectingUrl: 'file://' + __dirname + '/connecting.html',
@@ -100,7 +101,7 @@ app.setKiosk = function(flag) {
 function hideMouseCursor() {
   mainWindow.webContents.insertCSS('html {cursor: none}');
 
-  const bounds = electron.screen.getPrimaryDisplay().bounds;
+  const bounds = require('electron').screen.getPrimaryDisplay().bounds;
 
   mainWindow.webContents.sendInputEvent({
     type: 'mouseDown',

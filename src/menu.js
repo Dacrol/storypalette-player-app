@@ -1,4 +1,4 @@
-const dialog = require('dialog');
+const {dialog} = require('electron');
 
 module.exports = function(app, win) {
 
