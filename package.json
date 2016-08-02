@@ -1,7 +1,7 @@
 {
   "name": "storypalette-player-app",
   "productName": "Storypalette Player",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Standalone Player for Storypalette-enhanced rooms",
   "main": "src/main.js",
   "scripts": {
