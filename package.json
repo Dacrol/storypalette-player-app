@@ -6,7 +6,7 @@
   "main": "src/main.js",
   "scripts": {
     "start": "./node_modules/.bin/electron .",
-    "build": "electron-packager . 'Storypalette Player' --platform=darwin --arch=x64 --app-version=$npm_package_version --out=dist --overwrite --ignore=dist",
+    "build": "electron-packager . 'Storypalette Player' --platform=darwin --arch=x64 --out=dist --prune --overwrite",
     "version": "npm version patch",
     "deploy": "npm run version && git push --tags origin master",
     "postinstall": "electron-rebuild"
