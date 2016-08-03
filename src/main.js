@@ -44,6 +44,8 @@ function createWindow() {
   const isKiosk = (typeof config.kioskMode === 'boolean') ? config.kioskMode : true;
   app.setKiosk(isKiosk);
 
+  hideMouseCursor();
+
   // Show 'connecting' page until we have a connection...
   // Keep pinging server in case we lose connection.
   checkConnection(connCb);
@@ -84,15 +86,12 @@ function createWindow() {
   });
 }
 
-app.startDmx = function(room) {
+app.setKiosk = function(isKiosk) {
+  mainWindow.setKiosk(isKiosk);
 
-}
-
-app.setKiosk = function(flag) {
-  mainWindow.setKiosk(flag);
-
-  if (flag) {
-    hideMouseCursor();
+  // Only hide cursor if we're running in kiosk mode
+  if (isKiosk) {
+    hideMouseCursor(); 
   }
 }
 
@@ -101,12 +100,15 @@ app.setKiosk = function(flag) {
 function hideMouseCursor() {
   mainWindow.webContents.insertCSS('html {cursor: none}');
 
-  const bounds = require('electron').screen.getPrimaryDisplay().bounds;
+  // Hide cursor when html is loaded
+  mainWindow.webContents.on('dom-ready', () => {
+    const bounds = require('electron').screen.getPrimaryDisplay().bounds;
 
-  mainWindow.webContents.sendInputEvent({
-    type: 'mouseDown',
-    x: bounds.width / 2,
-    y: bounds.height / 2,
+    mainWindow.webContents.sendInputEvent({
+      type: 'mouseDown',
+      x: bounds.width / 2,
+      y: bounds.height / 2,
+    });
   });
 }
 
