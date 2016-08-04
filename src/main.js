@@ -91,7 +91,10 @@ app.setKiosk = function(isKiosk) {
 
   // Only hide cursor if we're running in kiosk mode
   if (isKiosk) {
-    hideMouseCursor(); 
+    mainWindow.webContents.on('dom-ready', () => {
+      console.log('dom ready');
+      hideMouseCursor(); 
+    });
   }
 }
 
@@ -100,15 +103,14 @@ app.setKiosk = function(isKiosk) {
 function hideMouseCursor() {
   mainWindow.webContents.insertCSS('html {cursor: none}');
 
-  // Hide cursor when html is loaded
-  mainWindow.webContents.on('dom-ready', () => {
-    const bounds = require('electron').screen.getPrimaryDisplay().bounds;
+  const bounds = require('electron').screen.getPrimaryDisplay().bounds;
+  const x = bounds.width / 2;
+  const y = bounds.height / 2;
 
-    mainWindow.webContents.sendInputEvent({
-      type: 'mouseDown',
-      x: bounds.width / 2,
-      y: bounds.height / 2,
-    });
+  mainWindow.webContents.sendInputEvent({
+    type: 'mouseDown',
+    x,
+    y,
   });
 }
 
@@ -122,6 +124,7 @@ var connCb = function(err) {
   } else {
     if (!playerLoaded) {
       mainWindow.loadURL(config.playerUrl);
+      hideMouseCursor();
       playerLoaded = true;
     }
   } 
